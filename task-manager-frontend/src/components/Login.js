@@ -9,13 +9,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("e>>", email, password);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
-      console.log("res>>", res);
+      const res = await axios.post(
+        `${process.env.REACT_APP_HOST_URL}/api/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
       localStorage.setItem("token", res.data.token);
       // Redirect or perform further actions
       if (res?.data?.success) {

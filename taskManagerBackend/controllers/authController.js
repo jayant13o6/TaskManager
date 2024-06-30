@@ -40,7 +40,7 @@ export const registerUser = async (req, res) => {
       },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.status(200).json({ success: "true", token });
       }
     );
   } catch (err) {
@@ -51,8 +51,6 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  console.log("login:", req.body);
-  console.log("verify1:", process.env.JWT_SECRET);
   try {
     let user = await User.findOne({ email });
 

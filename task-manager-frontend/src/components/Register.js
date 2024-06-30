@@ -10,14 +10,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("e>>", email, password);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
-        name,
-        email,
-        password,
-      });
-      console.log("res>>", res);
+      const res = await axios.post(
+        `${process.env.REACT_APP_HOST_URL}/api/auth/register`,
+        {
+          name,
+          email,
+          password,
+        }
+      );
       if (res?.data?.success) {
         navigate("/tasks"); // Navigate to the tasks page after login
       }

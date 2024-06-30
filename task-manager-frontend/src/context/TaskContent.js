@@ -48,7 +48,7 @@ export const TaskProvider = ({ children }) => {
 
   const getTasks = async () => {
     setLoading();
-    const res = await axios.get("http://localhost:5000/api/tasks", {
+    const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/tasks`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     dispatch({
@@ -58,9 +58,13 @@ export const TaskProvider = ({ children }) => {
   };
 
   const addTask = async (task) => {
-    const res = await axios.post("http://localhost:5000/api/tasks", task, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
+    const res = await axios.post(
+      `${process.env.REACT_APP_HOST_URL}/api/tasks`,
+      task,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
     dispatch({
       type: "ADD_TASK",
       payload: res.data,
@@ -70,7 +74,7 @@ export const TaskProvider = ({ children }) => {
   const updateTask = async (id, updateTask) => {
     console.log("updateTAsk::", updateTask);
     const res = await axios.put(
-      `http://localhost:5000/api/tasks/${id}`,
+      `${process.env.REACT_APP_HOST_URL}/api/tasks/${id}`,
       updateTask,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -82,7 +86,7 @@ export const TaskProvider = ({ children }) => {
     });
   };
   const deleteTask = async (id) => {
-    await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+    await axios.delete(`${process.env.REACT_APP_HOST_URL}/api/tasks/${id}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     dispatch({

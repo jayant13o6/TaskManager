@@ -1,0 +1,16 @@
+{
+  "name": "TaskManager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jayant13o6/TaskManager.git",
+  "author": "jayant13o6 <jayantgarg1306@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "install": "cd task-manager-frontend && npm install && cd ../taskManagerBackend && npm install",
+    "dev": "concurrently \"cd task-manager-frontend && npm start\" \"cd taskManagerBackend && npm run dev\"",
+    "dev:server": "cd taskManagerBackend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
