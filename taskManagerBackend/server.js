@@ -14,7 +14,12 @@ console.log("Mongo URI:", process.env.MONGO_URI);
 connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => res.send("API Running"));
 

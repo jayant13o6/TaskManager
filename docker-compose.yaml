@@ -1,0 +1,33 @@
+version: "3.6"
+services:
+  frontend:
+    container_name: task-manager-frontend
+    build:
+      dockerfile: Dockerfile
+      context: ./task-manager-frontend
+    depends_on:
+      - server-api
+    restart: always
+
+  server-api:
+    container_name: task-manager-server
+    build:
+      dockerfile: Dockerfile
+      context: ./taskManagerBackend
+    restart: always
+    environment:
+      PORT: 4000
+      MONGO_URI: mongodb+srv://jayantgarg1306:ENMSb7VWNdaBodrW@cluster0.7wz8d13.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      JWT_SECRET: somethingSecret
+
+  nginx:
+    restart: always
+    container_name: task-manager-nginx
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - server-api
+      - frontend
